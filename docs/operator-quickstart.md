@@ -19,7 +19,7 @@ JVM と Clojure CLI だけ。ネットワークに出るのは初回の依存解
 
 ## 1. テストを走らせる
 
-    clojure -M:test
+    kbb -M:test
 
 9 本・278 assertion が緑で、exit 0:
 
@@ -36,7 +36,7 @@ introspect して 20 セル全部に同じ契約を当てるため。**セルを
 
 ## 2. lint
 
-    clojure -M:lint
+    kbb -M:lint
 
     src/datacenter/murakumo.cljk:194:14: warning: unused binding input
     linting took 984ms, errors: 0, warnings: 1
@@ -52,7 +52,7 @@ introspect して 20 セル全部に同じ契約を当てるため。**セルを
 
 ### 3a. attestation 無し → 拒否
 
-    clojure -M -e '
+    kbb -M -e '
     (require (quote [datacenter.murakumo :as m]))
     (let [p (m/cell-plan :reviewchange {})]
       (println "status      :" (:status p))
@@ -74,7 +74,7 @@ introspect して 20 セル全部に同じ契約を当てるため。**セルを
 
 ### 3b. 7 つ揃える → 通る
 
-    clojure -M -e '
+    kbb -M -e '
     (require (quote [datacenter.murakumo :as m]) (quote [clojure.pprint :as pp]))
     (def att (into {} (map (fn [g] [g (str "attested-" (name g))])) m/common-gates))
     (let [p (m/cell-plan :reviewchange
@@ -109,7 +109,7 @@ introspect して 20 セル全部に同じ契約を当てるため。**セルを
 3a と 3b だけでは「何かがあれば通る」しか言えない。gate が**自分が名乗って
 いる理由で**拒否していることは、1 つだけ抜いて確かめる:
 
-    clojure -M -e '
+    kbb -M -e '
     (require (quote [datacenter.murakumo :as m]))
     (def att (into {} (map (fn [g] [g (str "attested-" (name g))])) m/common-gates))
     (let [p (m/cell-plan :reviewchange
@@ -128,7 +128,7 @@ introspect して 20 セル全部に同じ契約を当てるため。**セルを
 
 ## 4. 宣言されているセルを見る
 
-    clojure -M -e '
+    kbb -M -e '
     (require (quote [datacenter.murakumo :as m]))
     (println "cells:" (count m/cell-specs))
     (doseq [[k s] (sort-by key m/cell-specs)]
@@ -159,10 +159,10 @@ introspect するので、契約テストは自動で新しいセルに当たる
 
 ## 6. 変更を入れるとき
 
-1. `clojure -M:test` を**変更前に**通す（緑であることを確認してから触る。
+1. `kbb -M:test` を**変更前に**通す（緑であることを確認してから触る。
    変更後に赤くなったとき、それが自分のものだと言えるようにするため）。
 2. 変更する。
-3. `clojure -M:test` と `clojure -M:lint` を通す。warning は 1 件のまま
+3. `kbb -M:test` と `kbb -M:lint` を通す。warning は 1 件のまま
    （§2）であることを確認する。
 4. gate の挙動を変えたなら、§3a / §3b / §3c を**3 つとも**walk し直す。
    閉まる方だけ、開く方だけでは、判定が壊れたことを検出できない。
