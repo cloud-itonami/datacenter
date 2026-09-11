@@ -3,7 +3,7 @@
 **この repo は datacenter ではない。datacenter 運用の「計画器」である。**
 名前が機能を示さないので冒頭で名乗る（CLAUDE.md「名前が機能を示さない repo は
 README 冒頭で名乗る」）。中身は純粋な `.cljc` が 1 本
-（`src/datacenter/murakumo.cljc`）で、facility 単位の運用要求を受けて
+（`src/datacenter/murakumo.cljk`）で、facility 単位の運用要求を受けて
 **「この操作を実行してよいか」を判定し、実行してよい場合の効果を記述して返す**。
 効果を実行する経路はこの repo に無い（下記「現在地」）。
 
@@ -38,8 +38,8 @@ BPMN-as-actor（ADR-0055）の cljc 境界として `actor-manifest.jsonld` か�
 
 | path | 何か |
 |---|---|
-| `src/datacenter/murakumo.cljc` | 唯一の実装。純粋関数のみ（I/O 無し）。`cell-specs`（20 セル宣言）/ `missing-gates` / `cell-plan` / `all-cell-plans` |
-| `test/datacenter/murakumo_test.cljc` | 契約テスト 9 本 / 278 assertion。セル名をハードコードせず `cell-specs` を introspect するので、宣言が増えても追随する |
+| `src/datacenter/murakumo.cljk` | 唯一の実装。純粋関数のみ（I/O 無し）。`cell-specs`（20 セル宣言）/ `missing-gates` / `cell-plan` / `all-cell-plans` |
+| `test/datacenter/murakumo_test.cljk` | 契約テスト 9 本 / 278 assertion。セル名をハードコードせず `cell-specs` を introspect するので、宣言が増えても追随する |
 | `actor-manifest.jsonld` | actor の宣言（DID・capability・governance rule・sub-actor） |
 | `.well-known/did.json` | 公開 DID document |
 | `deps.edn` | `:test`（cognitect test-runner）/ `:lint`（clj-kondo） |
