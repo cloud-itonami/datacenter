@@ -38,7 +38,7 @@ introspect して 20 セル全部に同じ契約を当てるため。**セルを
 
     clojure -M:lint
 
-    src/datacenter/murakumo.cljc:194:14: warning: unused binding input
+    src/datacenter/murakumo.cljk:194:14: warning: unused binding input
     linting took 984ms, errors: 0, warnings: 1
 
 **warning 1 件が既知の現在地**（`cell-plan` の分配束縛 `:as input` が本体で
@@ -143,7 +143,7 @@ introspect するので、契約テストは自動で新しいセルに当たる
 ここを設計として読まないこと。**測って確かめた不在**である:
 
 - **効果を実行するものが無い。** `:mst/put-record` はこの repo では構築される
-  だけ（`src/datacenter/murakumo.cljc:186` の 1 箇所）で、消費側が無い。
+  だけ（`src/datacenter/murakumo.cljk:186` の 1 箇所）で、消費側が無い。
   §3b の出力は「こうせよ」という plan であって、何も書き込まれていない。
 - **manifest の governance rule 3 本は未実装。**
   `RULE-DATACENTER-APPROVAL` / `-HEALTHCHECK` / `-AUDIT` は
