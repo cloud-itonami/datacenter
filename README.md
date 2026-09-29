@@ -1,7 +1,7 @@
 # datacenter
 
 **この repo は datacenter ではない。datacenter 運用の「計画器」である。**
-名前が機能を示さないので冒頭で名乗る（CLAUDE.md「名前が機能を示さない repo は
+名前が機能を示さないので冒頭で名乗る（AGENTS.md「名前が機能を示さない repo は
 README 冒頭で名乗る」）。中身は純粋な `.cljc` が 1 本
 （`src/datacenter/murakumo.cljk`）で、facility 単位の運用要求を受けて
 **「この操作を実行してよいか」を判定し、実行してよい場合の効果を記述して返す**。
